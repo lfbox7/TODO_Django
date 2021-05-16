@@ -1,0 +1,23 @@
+{% extends 'what_needs_to_get_done/base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Detail -
+        <small>{{ task.title }}</small>
+    </h1>
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Name:</strong> {{ task.title }}</li>
+              <li class="list-group-item"><strong>Description:</strong> {{ task.status }}</li>
+              <li class="list-group-item"><strong>Price:</strong> {{ task.due_date }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row top-buffer">
+        <div class="col-12">
+                <a href="{% url 'task_edit' task.id %}"><button type="button" class="btn btn-success">Edit</button></a>
+                <a href="{% url 'task_list' %}"><button type="button" class="btn btn-secondary">Back</button></a>
+        </div>
+    </div>
+{% endblock %}

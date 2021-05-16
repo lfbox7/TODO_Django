@@ -1,0 +1,19 @@
+{% extends 'what_needs_to_get_done/base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Delete -
+        <small>{{ task }}</small>
+    </h1>
+    <div class="row">
+        <div class="col-12">
+            <form method="post">
+                {% csrf_token %}
+                <div class="alert alert-warning" role="alert">
+                  Are you sure to delete {{ task }} ?
+                </div>
+                <input type="submit" class="btn btn-info" value="Yes, delete it" />
+                <a class="btn btn-success" href="{% url 'task_list' %}">No, just I've tried the delete button</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

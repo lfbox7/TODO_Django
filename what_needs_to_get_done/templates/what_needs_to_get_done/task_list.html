@@ -1,0 +1,65 @@
+{% extends 'what_needs_to_get_done/base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <h1 class="text-center p-5">My TODO List</h1>
+            </div>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% if object_list %}
+        <div class="container">
+            {% for task in object_list %}
+            <div class="row">
+                <h6 class="offset-1 text-secondary"><b>{{ task.due_date }}</b></h6>
+            </div>
+            <div class="row pb-2">
+                <div class="card col-10 offset-1">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-7">
+                                <h4 class="text-primary" >{{ task.title }}</h4>
+                            </div>
+                            <div class="col-3">
+                                <select class="form-select" aria-label="Default select example" id="status" name="status">
+                                    <option selected>{{ task.status }}</option>
+                                    <option value="NOT_STARTED">Not started</option>
+                                    <option value="IN_PROGRESS">In progress</option>
+                                    option value="COMPLETED">Completed</option>
+                                    <option value="OVERDUE">Overdue</option>
+                                </select>
+                            </div>
+                            <div class="col-1 mr-auto">
+                                <a href="{% url 'task_view' task.id %}" role="button" type="submit" class="btn btn-outline-primary" value="Update" data-bs-target="#update">Update</a>
+                            </div>
+                            <div class="col-1 mr-auto">
+                                <a href="{% url 'task_delete' task.id %}" role="button" type="submit" class="btn btn-outline-danger" value="Delete" data-bs-target="#delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-2 offset-10 mr-auto">
+                    <a role="button" href="{% url 'task_new' %}" class="btn btn-outline-dark">Add Task</a>
+                </div>
+            </div>
+
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    There is no task, yet. But if you want, you can add from <a class="badge badge-info" href="{% url 'task_new' %}"><strong>here.</strong></a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
